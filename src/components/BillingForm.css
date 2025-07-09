@@ -1,0 +1,145 @@
+body {
+    background-image: url('/cracker-bg.jpg');
+    /* Place image in public/ */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.glass-box {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 700px;
+    width: 100%;
+    color: white;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+input::placeholder {
+    color: #eee;
+}
+
+.section-title {
+    font-size: 18px;
+    margin: 20px 0 20px;
+    font-weight: bold;
+}
+
+.add-button {
+    padding: 10px 20px;
+    background-color: #3478f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background-color: #275dc9;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.download {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.original {
+    background-color: #2ecc71;
+}
+
+.duplicate {
+    background-color: #f1c40f;
+}
+
+.original:hover {
+    background-color: #27ae60;
+}
+
+.duplicate:hover {
+    background-color: #d4ac0d;
+}
+
+/* Remove number input arrows/spinners in all browsers */
+
+/* Chrome, Safari, Edge */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+
+.remove-button {
+    margin-left: 10px;
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    color: darkred;
+}
