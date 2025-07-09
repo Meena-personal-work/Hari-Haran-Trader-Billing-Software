@@ -5,7 +5,7 @@ import "jspdf-autotable";
 
 
 const ProductForm = () => {
-  const [from, setFrom] = useState("");
+  const [toAddress, settoAddress] = useState("");
   const [to, setTo] = useState("");
   const [products, setProducts] = useState([
     { name: "", quantity: "", rate: "" },
@@ -27,7 +27,7 @@ const ProductForm = () => {
   // };
 
   const validateForm = () => {
-    if (!from.trim() || !to.trim()) {
+    if (!toAddress.trim() || !to.trim()) {
       alert("Please fill in both 'From' and 'To' fields.");
       return false;
     }
@@ -59,13 +59,13 @@ const ProductForm = () => {
   if (validateForm()) {
     console.log('mkmk');
     
-    GenerateInvoicePDF({to, products, type: "original" });
+    GenerateInvoicePDF({to, products, type: "original", toAddress });
   }
 };
 
 const handleDuplicatePdf = () => {
   if (validateForm()) {
-    GenerateInvoicePDF({ to, products, type: "duplicate" });
+    GenerateInvoicePDF({ to, products, type: "duplicate", toAddress });
   }
 };
 
@@ -75,19 +75,20 @@ const handleDuplicatePdf = () => {
         <h2 className="title">🎇 Invoice Downloader 🎇</h2>
 
         <div className="form-row">
-          <label>From</label>
-          <input
-            type="text"
-            value={from}
-            placeholder="Enter sender name"
-            onChange={(e) => setFrom(e.target.value)}
-          />
+        
           <label>To</label>
           <input
             type="text"
             value={to}
             placeholder="Enter receiver name"
             onChange={(e) => setTo(e.target.value)}
+          />
+            <label>Address</label>
+          <input
+            type="text"
+            value={toAddress}
+            placeholder="Enter sender name"
+            onChange={(e) => settoAddress(e.target.value)}
           />
         </div>
 
