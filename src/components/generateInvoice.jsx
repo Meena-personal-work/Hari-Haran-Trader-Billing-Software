@@ -1,19 +1,6 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-
-const getInvoiceNumber = (type) => {
-  let lastInvoiceNumber = localStorage.getItem('lastInvoiceNumber');
-  lastInvoiceNumber = lastInvoiceNumber ? parseInt(lastInvoiceNumber) : 0;
-
-  if (type === 'original') {
-    lastInvoiceNumber += 1;
-    localStorage.setItem('lastInvoiceNumber', lastInvoiceNumber);
-  }
-
-  return lastInvoiceNumber;
-};
-
-const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
+const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo, toInvoiceNo }) => {
   const doc = new jsPDF();
 
   doc.rect(5, 5, 200, 287);
@@ -37,9 +24,10 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
   doc.line(10, 50, 200, 50);
 
   const date = new Date().toLocaleDateString();
-  const invoiceNumber = getInvoiceNumber(type);
 
   const wrappedTo = doc.splitTextToSize(to || "_____", 60);
+  const wrappedPhoneNo = doc.splitTextToSize(toPhoneNo || "_____", 60);
+  const wrappedGSTNo = doc.splitTextToSize(toGstNo || "_____", 60);
   const wrappedAddress = doc.splitTextToSize(toAddress || "_____", 60);
   const addressHeight = (wrappedTo.length + wrappedAddress.length) * 5 + 15;
   const boxHeight = Math.max(28, addressHeight);
@@ -54,17 +42,29 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
   doc.setFont("helvetica", "normal");
   doc.text(wrappedTo, 36, 60);
 
-  const addressY = 60 + wrappedTo.length * 5 + 2;
-  doc.setFont("helvetica", "bold");
-  doc.text("Address:", 17, addressY);
-  doc.setFont("helvetica", "normal");
-  doc.text(wrappedAddress, 36, addressY);
+const phoneY = 60 + wrappedTo.length * 5 + 2;
+doc.setFont("helvetica", "bold");
+doc.text("Phone No:", 17, phoneY);
+doc.setFont("helvetica", "normal");
+doc.text(wrappedPhoneNo, 36, phoneY);
+
+const gstY = phoneY + wrappedPhoneNo.length * 5 + 2;
+doc.setFont("helvetica", "bold");
+doc.text("GST No:", 17, gstY);
+doc.setFont("helvetica", "normal");
+doc.text(wrappedGSTNo? wrappedGSTNo: '-' , 36, gstY);
+
+const addressY = gstY + wrappedGSTNo.length * 5 + 2;
+doc.setFont("helvetica", "bold");
+doc.text("Address:", 17, addressY);
+doc.setFont("helvetica", "normal");
+doc.text(wrappedAddress, 36, addressY);
 
   const rightX = boxCenterX + 5;
   doc.setFont("helvetica", "bold");
   doc.text("Invoice No:", rightX, 60);
   doc.setFont("helvetica", "normal");
-  doc.text(`${invoiceNumber}`, rightX + 35, 60);
+  doc.text(`${toInvoiceNo}`, rightX + 35, 60);
 
   doc.setFont("helvetica", "bold");
   doc.text("Date:", rightX, 67);
@@ -76,10 +76,13 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
   doc.setFont("helvetica", "normal");
   doc.text("36041000", rightX + 35, 74);
 
+  const totalCases = products.reduce((acc, curr) => acc + parseFloat(curr.quantity || 0), 0);
   doc.setFont("helvetica", "bold");
   doc.text("Total:", rightX, 81);
   doc.setFont("helvetica", "normal");
-  doc.text(`${products.length} Case(s)`, rightX + 35, 81);
+  doc.text(`${totalCases} Case(s)`, rightX + 35, 81);
+
+  // doc.text(`${products.length} Case(s)`, rightX + 35, 81);
 
   const tableStartY = boxTopY + boxHeight + 5;
   const maxRows = 20;
@@ -102,7 +105,7 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
 
   autoTable(doc, {
     startY: tableStartY,
-    head: [["S.No", "Product Particulars", "Quantity", "Rate", "Amount"]],
+    head: [["S.No", "Product Particulars", "Cases", "Rate", "Amount"]],
     body: actualRows,
     styles: {
       fontSize: 10,
@@ -180,7 +183,7 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress }) => {
   doc.text("Prepared by", 15, pageHeight - 25);
   doc.text("Checked by", 80, pageHeight - 25);
   doc.text("For HARIHARAN TRADER", 145, pageHeight - 25);
-  doc.text("Authorised Signatory", 150, pageHeight - 20);
+  doc.text("Authorised Signatory", 150, pageHeight - 11);
 
   doc.save(`${to} - ${type}_invoice.pdf`);
 };
