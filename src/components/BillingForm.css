@@ -59,6 +59,7 @@ input {
     border: 1px solid white;
     background: rgba(255, 255, 255, 0.2);
     color: white;
+    margin-bottom: 20px;
 }
 
 input::placeholder {
