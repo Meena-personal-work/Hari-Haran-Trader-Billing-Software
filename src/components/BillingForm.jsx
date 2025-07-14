@@ -94,54 +94,39 @@ const handleDuplicatePdf = () => {
 
         <h3 className="section-title">Products</h3>
         {products.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              marginBottom: "25px",
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Product Name"
-              value={item.name}
-              onChange={(e) => handleChange(index, "name", e.target.value)}
-              style={{ flex: 1, padding: "10px" }}
-            />
-            <input
-              type="number"
-              placeholder="Quantity"
-              value={item.quantity}
-              onChange={(e) => handleChange(index, "quantity", e.target.value)}
-              style={{ width: "100px", padding: "10px" }}
-            />
-            <input
-              type="number"
-              placeholder="Rate"
-              value={item.rate}
-              onChange={(e) => handleChange(index, "rate", e.target.value)}
-              style={{ width: "100px", padding: "10px" }}
-            />
-            {products.length > 1 && (
-              <button
-                onClick={() => {
-                  const newProducts = [...products];
-                  newProducts.splice(index, 1);
-                  setProducts(newProducts);
-                }}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "red",
-                  cursor: "pointer",
-                }}
-              >
-                ❌
-              </button>
-            )}
-          </div>
+      <div key={index} className="products-container">
+  <input
+    className="input-mobile product-name"
+    type="text"
+    placeholder="Product Name"
+    value={item.name}
+    onChange={(e) => handleChange(index, "name", e.target.value)}
+  />
+  <input
+    className="input-mobile product-quantity"
+    type="number"
+    placeholder="Quantity"
+    value={item.quantity}
+    onChange={(e) => handleChange(index, "quantity", e.target.value)}
+  />
+  <input
+    className="input-mobile product-rate"
+    type="number"
+    placeholder="Rate"
+    value={item.rate}
+    onChange={(e) => handleChange(index, "rate", e.target.value)}
+  />
+  {products.length > 1 && (
+    <button className="remove-button" onClick={() => {
+      const newProducts = [...products];
+      newProducts.splice(index, 1);
+      setProducts(newProducts);
+    }}>
+      ❌
+    </button>
+  )}
+</div>
+
         ))}
 
         <button className="add-button" onClick={addProduct}>
