@@ -176,7 +176,7 @@ const handleReset = () => {
           <button className="download duplicate" onClick={handleDuplicatePdf}>
             Download Duplicate
           </button>
-          <button className="download" onClick={handleReset}>
+          <button className="download reset" onClick={handleReset}>
             Reset
           </button>
           {/* <GenerateInvoicePDF from={from} to={to} products={products} type="original" />

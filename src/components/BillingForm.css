@@ -16,6 +16,10 @@ body {
     padding: 20px;
 }
 
+.products-container{
+    width: calc(100% - 20px);
+} 
+
 .glass-box {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -107,6 +111,10 @@ input::placeholder {
 
 .duplicate {
     background-color: #f1c40f;
+}
+
+.reset{
+   background-color: rgb(247, 137, 137);
 }
 
 .original:hover {
