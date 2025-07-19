@@ -1,11 +1,11 @@
 body {
-    background-image: url('/cracker-bg.jpg');
-    /* Place image in public/ */
+    background-image: url('/Crackers_FLip.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
+    width:100%;
 }
 
 .main-container {
@@ -163,5 +163,13 @@ input[type='number'] {
 
     input {
         margin-bottom: 20px;
+    }
+
+    .glass-box{
+        padding: 10px;
+    }
+
+    .main-container{
+        padding: unset;
     }
 }

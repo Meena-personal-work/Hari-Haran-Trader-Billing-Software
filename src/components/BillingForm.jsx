@@ -61,8 +61,6 @@ const ProductForm = () => {
 
   const handleOriginalPdf = () => {
   if (validateForm()) {
-    console.log('mkmk');
-    
     GenerateInvoicePDF({to, products, type: "original", toAddress, toGstNo,toPhoneNo,toInvoiceNo });
   }
 };
@@ -179,8 +177,6 @@ const handleReset = () => {
           <button className="download reset" onClick={handleReset}>
             Reset
           </button>
-          {/* <GenerateInvoicePDF from={from} to={to} products={products} type="original" />
-<GenerateInvoicePDF from={from} to={to} products={products} type="duplicate" /> */}
         </div>
       </div>
     </div>
