@@ -406,10 +406,10 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo,
   doc.setFont("helvetica", "normal");
   doc.text("No.3/1341/15, Sattur Road, Opp. Old PRC Bus Depot,", 62, 20);
   doc.text("Near East Police Station, SIVAKASI – 626 189.", 65, 25);
-  doc.text("GST No:33AA1FH1506M12J", 83, 30);
+  doc.text("GST No:33AA1FH1506M12Z", 83, 30);
 
   doc.setFont("helvetica", "bold");
-  doc.text(`${type === "original" ? "Original" : "Duplicate"} for Transporter`, 150, 48);
+  doc.text(`${type === "original" ? "Original for Receiptor" : "Duplicate for Transporter"}`, 150, 48);
 
   doc.setFont("helvetica", "normal");
   doc.text("BILL OF SUPPLY", 90, 43);
