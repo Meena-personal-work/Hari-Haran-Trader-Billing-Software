@@ -393,7 +393,7 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo, toInvoiceNo }) => {
+const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo, toInvoiceNo, toInvoiceDate }) => {
   const doc = new jsPDF();
 
   doc.rect(5, 5, 200, 287);
@@ -416,7 +416,7 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo,
   doc.text("(Composition in GST under Sec.10)", 75, 48);
   doc.line(10, 50, 200, 50);
 
-  const date = new Date().toLocaleDateString();
+ const date = toInvoiceDate || new Date().toLocaleDateString();
 
   const wrappedTo = doc.splitTextToSize(to || "_____", 65);
   const wrappedAddress = doc.splitTextToSize(toAddress || "_____", 65);
