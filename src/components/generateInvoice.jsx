@@ -416,8 +416,10 @@ const GenerateInvoicePDF = ({ to, products, type, toAddress, toGstNo, toPhoneNo,
   doc.text("(Composition in GST under Sec.10)", 75, 48);
   doc.line(10, 50, 200, 50);
 
- const date = toInvoiceDate || new Date().toLocaleDateString();
-
+// const date = toInvoiceDate || new Date().toLocaleDateString();
+const date = toInvoiceDate
+  ? new Date(toInvoiceDate + "T00:00:00").toLocaleDateString("en-GB")
+  : new Date().toLocaleDateString("en-GB");
   const wrappedTo = doc.splitTextToSize(to || "_____", 65);
   const wrappedAddress = doc.splitTextToSize(toAddress || "_____", 65);
   const wrappedPhoneNo = doc.splitTextToSize(toPhoneNo || "_____", 65);
